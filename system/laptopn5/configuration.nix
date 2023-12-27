@@ -130,6 +130,7 @@
     packages = with pkgs; [
       firefox
       kitty
+      steam
     #  thunderbird
     ];
   };
