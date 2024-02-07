@@ -7,7 +7,7 @@ mute_color="#707880"
 
 mute_emoji="󰝟"
 
-fifo_file=/tmp/pipewire-control.fifo
+fifo_file=/tmp/pipewire-control$$.fifo
 
 next_sink_index() {
     sink_index=$(pactl list sinks | awk "/Sink #/{n++} END {print $sink_index % n + 1}")
@@ -69,6 +69,7 @@ make_fifo() {
     # If fd 3 is non existant, create it
     ( : >&3 ) 2>/dev/null || exec 3<>"$fifo_file"
     trap "rm $fifo_file" EXIT
+    trap "rm $fifo_file; exit 0" SIGTERM
 }
 
 listen() {
@@ -172,6 +173,7 @@ while [ $# -ne 0 ]; do
     --set-nick)
         shift
         eval "sink_nick_$(echo "$1" | sed 's/\(.*\)=.*/\1/;s/[[:punct:]]/_/g')"="'$(echo "$1" | awk -F = '{print $2}')'"
+        echo "sink_nick_$(echo "$1" | sed 's/\(.*\)=.*/\1/;s/[[:punct:]]/_/g')"="'$(echo "$1" | awk -F = '{print $2}')'"
         ;;
     output)
         get_current_sink_name
@@ -180,16 +182,24 @@ while [ $# -ne 0 ]; do
         output
         ;;
     volume_up)
-        echo u > $fifo_file
+        for pipe in /tmp/pipewire-control*.fifo; do
+            echo u > $pipe
+        done
         ;;
     volume_down)
-        echo d > $fifo_file
+        for pipe in /tmp/pipewire-control*.fifo; do
+            echo d > $pipe
+        done
         ;;
     volume_mute)
-        echo m > $fifo_file
+        for pipe in /tmp/pipewire-control*.fifo; do
+            echo m > $pipe
+        done
         ;;
     next_sink)
-        echo n > $fifo_file
+        for pipe in /tmp/pipewire-control*.fifo; do
+            echo n > $pipe
+        done
         ;;
     listen)
         listen

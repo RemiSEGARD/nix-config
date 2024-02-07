@@ -23,6 +23,8 @@ in
 
   home.packages = [
     pkgs.i3lock-fancy-rapid
+    pkgs.xdotool
+    pkgs.bc
   ];
 
   xsession.windowManager.i3 = {
@@ -62,9 +64,14 @@ in
       keybindings = lib.mkOptionDefault {
         "${modifier}+Return" = "exec ${pkgs.kitty}/bin/kitty";
         "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun -show-icons -theme ${./rofi/config/launcher-style.rasi}";
-        "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
-        "${modifier}+Shift+s" = "exec ${pkgs.spectacle}/bin/spectacle -r";
         "${modifier}+Shift+e" = "exec ${rofi_power}";
+        "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
+        "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
+        "${modifier}+Shift+h" = "move workspace to output left";
+        "${modifier}+Shift+j" = "move workspace to output down";
+        "${modifier}+Shift+k" = "move workspace to output up";
+        "${modifier}+Shift+l" = "move workspace to output right";
+        "${modifier}+minus" = "exec ${./scratchpad_show.sh} --width 100ppt --height 35ppt --hgap right0ppt --vgap bottom65ppt --selector 'instance=\"scratchkitty\"'";
       };
   
       startup = [
@@ -75,12 +82,10 @@ in
         }
         {
           command = "${pkgs.slack}/bin/slack -u";
-          always = true;
           notification = false;
         }
         {
           command = "${pkgs.discord}/bin/discord --start-minimized";
-          always = true;
           notification = false;
         }
         {
@@ -99,10 +104,17 @@ in
         }
         {
           command = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+          notification = false;
+        }
+        {
+          command = "${pkgs.kitty}/bin/kitty --name scratchkitty";
           always = true;
           notification = false;
         }
       ];
     };
+    extraConfig = ''
+      for_window [instance="scratchkitty"] floating enable, resize set 1920 400, move absolute position 0 0, move window to scratchpad
+    '';
   };
 }

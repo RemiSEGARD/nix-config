@@ -128,7 +128,7 @@ in
         #label-padding = 2;
         label-foreground = "${colors.foreground}";
 
-        exec = ''${./pipewire.sh} --mute-color "${colors.disabled}" --set-nick "alsa_output.pci-0000_06_00.6.analog-stereo.2=Speakers" output listen'';
+        exec = ''${./pipewire.sh} --mute-color "${colors.disabled}" --set-nick "alsa_output.pci-0000_06_00.6.analog-stereo=Speakers"  --set-nick "alsa_output.pci-0000_01_00.1.hdmi-stereo=HDMI Speakers" output listen'';
         click-right = "exec pavucontrol &";
         click-left = "${./pipewire.sh} volume_mute";
         click-middle = ''${./pipewire.sh} next_sink'';

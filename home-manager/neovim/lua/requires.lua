@@ -1,0 +1,5 @@
+require('plugins')
+require('plugins.coc')
+require('keybinds')
+require('settings')
+require('themes')

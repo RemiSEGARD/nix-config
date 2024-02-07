@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager }: 
+  outputs = { self, nixpkgs, home-manager }@inputs : 
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -19,7 +19,7 @@
     lib = nixpkgs.lib;
   in
   {
-    nixosConfigurations = import ./system { inherit pkgs lib system; };
+    nixosConfigurations = import ./system { inherit inputs pkgs lib system; };
 
     hm = {
       remi = home-manager.lib.homeManagerConfiguration {

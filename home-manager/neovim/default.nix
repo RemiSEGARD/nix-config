@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 
 {
+  xdg.configFile."nvim/lua" = {
+    enable = true;
+    recursive = true;
+    source = ./lua;
+  };
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -8,6 +13,7 @@
     defaultEditor = true;
 
     extraLuaConfig = "require('requires')";
+
 
     coc = {
       enable = true;

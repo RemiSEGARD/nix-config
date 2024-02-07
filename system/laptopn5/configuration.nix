@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -60,7 +60,7 @@
   services.xserver = {
     layout = "gb";
     xkbVariant = "";
-    xkbOptions = "compose:ralt";
+    xkbOptions = "compose:ralt,caps:swapescape";
   };
 
   boot.extraModulePackages =
@@ -138,6 +138,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.nixPath = [
+    "nixpkgs=/etc/channels/nixpkgs"
+    "nixos-config=/etc/nixos/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -147,6 +153,7 @@
   ];
   environment.extraInit =
     "${pkgs.xorg.xset}/bin/xset r rate 500 50";
+  environment.etc."channels/nixpkgs".source = inputs.nixpkgs.outPath;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
