@@ -65,7 +65,7 @@ in
         "${modifier}+Return" = "exec ${pkgs.kitty}/bin/kitty";
         "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun -show-icons -theme ${./rofi/config/launcher-style.rasi}";
         "${modifier}+Shift+e" = "exec ${rofi_power}";
-        "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
+        "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window -theme ${./rofi/config/window-style.rasi}";
         "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
         "${modifier}+Shift+h" = "move workspace to output left";
         "${modifier}+Shift+j" = "move workspace to output down";
@@ -104,6 +104,10 @@ in
         }
         {
           command = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+          notification = false;
+        }
+        {
+          command = "${pkgs.snixembed}/bin/snixembed";
           notification = false;
         }
         {

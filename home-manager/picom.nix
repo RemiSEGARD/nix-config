@@ -11,7 +11,7 @@
         deviation = 5.0;
       };
       blur-background-exclude = [
-        "class_g = 'Rofi'"
+        #"class_g = 'Rofi'"
       ];
     };
 

@@ -1,10 +1,27 @@
 { pkgs, lib, ... }:
 
 {
-  xdg.configFile."nvim/lua" = {
-    enable = true;
-    recursive = true;
-    source = ./lua;
+  xdg.configFile = {
+    "nvim/syntax" = {
+      enable = true;
+      recursive = true;
+      source = ./syntax;
+    };
+    "nvim/ftdetect" = {
+      enable = true;
+      recursive = true;
+      source = ./ftdetect;
+    };
+    "nvim/ftplugin" = {
+      enable = true;
+      recursive = true;
+      source = ./ftplugin;
+    };
+    "nvim/lua" = {
+      enable = true;
+      recursive = true;
+      source = ./lua;
+    };
   };
   programs.neovim = {
     enable = true;

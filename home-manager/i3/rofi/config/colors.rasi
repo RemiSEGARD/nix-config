@@ -7,10 +7,11 @@
  **/
 
 * {
-    background:     #202020FF;
-    background-alt: #101010FF;
+    background:     #202020BB;
+    background-opq: #202020BB;
+    background-alt: #1A1A1ABB;
     foreground:     #FFFFFFFF;
-    selected:       #A0A0A0FF;
+    selected:       #A0A0A0DE;
     active:         #98C379FF;
     urgent:         #E06B74FF;
 }

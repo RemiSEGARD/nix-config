@@ -54,6 +54,7 @@
 
     gamemode
     prismlauncher
+    lutris
 
     gcc
     gnumake
@@ -65,6 +66,7 @@
     gdb
     man-pages
     ripgrep
+    tmux
 
     virt-manager
 
