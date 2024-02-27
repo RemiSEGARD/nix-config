@@ -43,4 +43,8 @@ map("n", "<A-p>", ":Telescope live_grep<CR>", opts)
 
 -- Swap lines below/above
 map("n", "-", ":m +1<cr>==", opts)
-map("n", "-", ":m -2<cr>==", opts)
+map("n", "_", ":m -2<cr>==", opts)
+
+-- Delete without save
+map("n", "<Leader>d", "\"_d", opts)
+map("v", "<Leader>d", "\"_d", opts)

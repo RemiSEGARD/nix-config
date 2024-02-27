@@ -55,6 +55,7 @@
     gamemode
     prismlauncher
     lutris
+    wine
 
     gcc
     gnumake

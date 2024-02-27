@@ -75,6 +75,7 @@
     nvidia = {
       prime = {
         #offload.enable = true;
+        #offload.enableOffloadCmd = true;
         sync.enable = true;
         amdgpuBusId = "PCI:6:0:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -168,6 +169,20 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true;
+    settings = {
+      general = {
+        renice = 10;
+        ioprio = 0;
+      };
+      gpu = {
+        gpu_device = 1;
+      };
+    };
+  };
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;

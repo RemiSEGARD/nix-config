@@ -90,7 +90,9 @@ in
         }
         {
           command = "${builtins.toString (pkgs.writeScriptBin "polybar-start" ''
+         ${pkgs.procps}/bin/pkill pactl
          ${pkgs.procps}/bin/pkill polybar
+         rm /tmp/pipewire-control*
          if type "xrandr"; then
              for m in $(${pkgs.xorg.xrandr}/bin/xrandr --query | ${pkgs.gnugrep}/bin/grep " connected" | ${pkgs.coreutils}/bin/cut -d" " -f1); do
                  MONITOR=$m ${pkgs.polybar}/bin/polybar --reload examples &
